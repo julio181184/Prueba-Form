@@ -1,0 +1,124 @@
+<!doctype html>
+<html>
+
+<head>
+	<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
+    <link href="style.css" rel="stylesheet"> 
+    <title>Prueba Form</title>	
+</head>
+<body>
+	<script>
+		
+            
+        function activaSelect() {
+            if(isValidPhone(document.contactForm.phone.value)){
+               document.getElementById("activate").disabled = false;
+            }
+            console.log("funciona o no");
+        }
+        function activaTime() {
+            if(isValidPhone(document.contactForm.phone.value)){
+               document.getElementById("time").disabled = false;
+            }
+        }
+            function validateForm(theForm) {            
+            var fname = theForm.firstname.value;
+            var lname = theForm.lastname.value;
+            if (!isValidName(fname) || !isValidName(lname)) {
+                alert("Please enter a valid First and Last name");
+            }
+            var email = theForm.email.value;
+            if (!isValidEmail(email)) {
+                alert("Enter a valid email");
+                return false;
+            }
+            var phone = theForm.phone.value;
+            if (!isValidPhone(phone)) {
+                alert("Enter a valid Phone Number");
+                return false;
+            }
+            console.log("Good valid");       
+        }
+        
+        function isValidName(name) {
+            var pattern = new RegExp(/^[a-z]{2,100}$/ig);
+            return pattern.test(name);
+        }
+
+        function isValidEmail(address) {
+            var pattern = new RegExp(/^\w{2,100}@\w{2,100}.\w{1,4}$/ig);
+            return pattern.test(address);
+        }
+
+        function isValidPhone(phoneNum) {
+            var phone = new RegExp(/^[0-9]{3}[-. ]{0,1}[0-9]{3}[-. ]{0,1}[0-9]{4}$/);
+            return phone.test(phoneNum);
+        }
+        
+	</script>
+	<div class="jumbotron col-sm-6 col-sm-push-3 col-xs-12">
+        
+		<h1>Prueba Form</h1><br>
+		<form role="form" id="form" name="contactForm" onsubmit="return validateForm(document.contactForm);">
+			<div class="row">
+            <div class="text-right col-xs-4 col-md-5">First Name</div>
+			<div class="col-xs-8 col-md-7"><input type="text" name="firstname" class="form-name"></div><br>
+            </div>   
+			<div class="row">
+            <div class="text-right col-xs-4 col-md-5">Last Name</div>
+			<div class="col-xs-8 col-md-7"><input type="text" name="lastname" class="form-lastname"></div>
+            </div> 
+            <div class="row">
+			<div class="text-right col-xs-4 col-md-5">Email</div>
+			<div class="col-xs-8 col-md-7"><input type="email" name="email" class="form-email"></div>
+            </div>
+            <div class="row">
+			<div class="text-right col-xs-4 col-md-5">Phone Number</div>
+			<div class="col-xs-8 col-md-7"><input type="text" name="phone" class="form-Phone" id="telef"></div>
+            </div>
+            <div class="row">
+            <div class="text-right col-xs-4 col-md-5">Reason for contact </div>
+			<div class="col-xs-8 col-md-7">
+            <select>
+			<option value selected disabled>-------------</option>
+			<option value="Consulting Work">Consulting Work</option>
+			<option value="Informational Request">Informational Request</option>
+			<option value="Personal">Personal</option>
+			</select>
+            </div>
+            </div>
+            <div class="row">
+            <div class="text-right col-xs-4 col-md-5">Best Method of contact</div>
+			<div class="col-xs-8 col-md-7">
+                <input type="radio" name="campo1" value="form-email" id="radioMail"checked/>E-mail<br>
+                <input type="radio" name="campo1" value="form-Phone" id="activate" disabled/>Phone
+            </div>
+            </div>
+            <div class="row">
+            <div class="text-right col-xs-4 col-md-5">Select a time:</div>
+                <div class="col-xs-8 col-md-7"><input type="time" name="usr_time" id= "time" disabled></div>
+            </div>    
+            <div class="row">
+			<div class="col-xs-4 col-md-2 col-xs-push-4 col-md-push-5">
+				<input type="submit"  value="submit" class="text-box">
+			</div>
+            </div>    
+		</form>
+	    </div>
+    </div>
+    <script>
+        
+        document.contactForm.phone.onchange = activaSelect;
+            
+        document.getElementById("activate").onclick = function(){
+            document.getElementById("time").disabled = false;    
+            console.log("test");
+        }
+        
+        document.getElementById("radioMail").onclick = function(){
+            document.getElementById("time").disabled = true;    
+            console.log("test");
+        }
+    </script>
+</body>
+</html>
